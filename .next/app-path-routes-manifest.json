@@ -1,0 +1,19 @@
+{
+  "/(site)/(auth)/forgot-password/page": "/forgot-password",
+  "/(site)/(auth)/signin/page": "/signin",
+  "/(site)/(auth)/signup/page": "/signup",
+  "/(site)/berita/[slug]/page": "/berita/[slug]",
+  "/(site)/berita/page": "/berita",
+  "/(site)/blogs/[slug]/page": "/blogs/[slug]",
+  "/(site)/blogs/page": "/blogs",
+  "/(site)/contact/page": "/contact",
+  "/(site)/documentation/page": "/documentation",
+  "/(site)/pengumuman/[slug]/page": "/pengumuman/[slug]",
+  "/(site)/search/page": "/search",
+  "/[[...slug]]/page": "/[[...slug]]",
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/api/layanan/route": "/api/layanan",
+  "/api/menu/route": "/api/menu",
+  "/api/slider/route": "/api/slider"
+}

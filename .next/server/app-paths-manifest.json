@@ -1,0 +1,19 @@
+{
+  "/(site)/(auth)/forgot-password/page": "app/(site)/(auth)/forgot-password/page.js",
+  "/(site)/(auth)/signin/page": "app/(site)/(auth)/signin/page.js",
+  "/(site)/(auth)/signup/page": "app/(site)/(auth)/signup/page.js",
+  "/(site)/berita/[slug]/page": "app/(site)/berita/[slug]/page.js",
+  "/(site)/berita/page": "app/(site)/berita/page.js",
+  "/(site)/blogs/[slug]/page": "app/(site)/blogs/[slug]/page.js",
+  "/(site)/blogs/page": "app/(site)/blogs/page.js",
+  "/(site)/contact/page": "app/(site)/contact/page.js",
+  "/(site)/documentation/page": "app/(site)/documentation/page.js",
+  "/(site)/pengumuman/[slug]/page": "app/(site)/pengumuman/[slug]/page.js",
+  "/(site)/search/page": "app/(site)/search/page.js",
+  "/[[...slug]]/page": "app/[[...slug]]/page.js",
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/layanan/route": "app/api/layanan/route.js",
+  "/api/menu/route": "app/api/menu/route.js",
+  "/api/slider/route": "app/api/slider/route.js"
+}

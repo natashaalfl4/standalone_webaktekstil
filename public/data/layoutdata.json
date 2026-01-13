@@ -1,0 +1,108 @@
+{
+  "headerData": [
+    {
+      "label": "Home",
+      "href": "/home",
+      "submenu": [
+        {
+          "label": "Profil",
+          "href": "/profil",
+          "submenu": [
+            { "label": "Sejarah", "href": "/profil/sejarah" },
+            { "label": "Visi dan Misi", "href": "/profil/visi-dan-misi" },
+            { "label": "Struktur Organisasi", "href": "/profil/struktur-organisasi" },
+            { "label": "Profil Pimpinan", "href": "/profil/profil-pimpinan" },
+            { "label": "Tugas dan Fungsi", "href": "/profil/tugas-dan-fungsi" },
+            { "label": "Program Studi", "href": "/profil/program-studi", "submenu": [
+                { "label": "Teknik Pembuatan Benang", "href": "/profil/program-studi/teknik-pembuatan-benang" },
+                { "label": "Teknik Pembuatan Kain Tenun", "href": "/profil/program-studi/teknik-pembuatan-kain-tenun" },
+                { "label": "Teknik Pembuatan Garmen", "href": "/profil/program-studi/teknik-pembuatan-garmen" }
+              ] },
+            { "label": "Dasar Hukum Penyelenggaraan", "href": "/profil/dasar-hukum" },
+            { "label": "Fasilitas", "href": "/profil/fasilitas", "submenu": [
+                { "label": "Ruang Kelas", "href": "/profil/fasilitas/ruang-kelas" },
+                { "label": "Ruang Workshop", "href": "/profil/fasilitas/ruang-dosen" },
+                { "label": "Lab Uji", "href": "/profil/fasilitas/lab-uji" },
+                { "label": "Lab Komputer", "href": "/profil/fasilitas/lab-komputer" },
+                { "label": "Perpustakaan", "href": "/profil/fasilitas/perpustakaan" }
+              ] }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Unit",
+      "href": "/unit",
+      "submenu": [
+        { "label": "Perpustakaan", "href": "/unit/perpustakaan", "submenu": [
+          { "label": "Struktur Organisasi Perpustakaan", "href": "/unit/perpustakaan/struktur-organisasi" },
+          { "label": "Visi dan Misi Perpustakaan", "href": "/unit/perpustakaan/visi-dan-misi" },
+          { "label": "Profil", "href": "/unit/perpustakaan/profil" }
+        ] },
+        { "label": "UPPM", "href": "/unit/uppm", "submenu": [
+          { "label": "Profil", "href": "/unit/uppm/profil" },
+          { "label": "Roadmap", "href": "/unit/uppm/roadmap" },
+          { "label": "JUTE", "href": "/unit/uppm/JUTE" }
+        ] },
+        { "label": "SPM", "href": "/unit/spm", "submenu":[
+          { "label": "Home", "href": "/unit/spm/home" },
+          { "label": "Akreditasi", "href": "/unit/spm/akreditasi" },
+          { "label": "ISO 21001:2018", "href": "/unit/spm/ISO21001:2018"},
+          { "label": "SPMI", "href": "/unit/spm/spmi" },
+          { "label": "Hasil Survei Kepuasan", "href": "/unit/spm/hasilsurveikepuasan", "submenu":[
+            { "label": "Pengguna Alumni", "href": "/unit/spm/hasilsurveikepuasan/penggunaalumni" },
+            { "label": "Alumni", "href": "/unit/spm/hasilsurveikepuasan/alumni" },
+            { "label": "Mahasiswa", "href": "/unit/spm/hasilsurveikepuasan/mahasiswa" },
+            { "label": "Dosen dan Tenaga Kependidikan", "href": "/unit/spm/hasilsurveikepuasan/dosentenagakependidikan"}
+          ] }
+        ] },
+        { "label": "LSP", "href": "/unit/lsp", "submenu": [
+          { "label": "Profil", "href": "/unit/lsp/profil" },
+          { "label": "Struktur Organisasi", "href": "/unit/lsp/struktur-organisasi" },
+          { "label": "Skema dan Unit Kompetensi", "href": "/unit/lsp/skema-dan-unit-kompetensi" },
+          { "label": "Surveilan Pemegang SerKom", "href": "/unit/lsp/surveilanpemegangserkom" }
+        ] },
+        { "label": "Inkubator Bisnis", "href": "/unit/inkubator-bisnis", "submenu": [
+          { "label": "Profil", "href": "/unit/inkubator-bisnis/profil" },
+          { "label": "Tujuan IB", "href": "/unit/inkubator-bisnis/tujuan-ib" },
+          { "label": "Sasaran IB", "href": "/unit/inkubator-bisnis/sasaran-ib" },
+          { "label": "Struktur Pengelola IB", "href": "/unit/inkubator-bisnis/struktur-pengelolaan" },
+          { "label": "Layanan", "href": "/unit/inkubator-bisnis/layanan" },
+          { "label": "Daftar Tenant", "href": "/unit/inkubator-bisnis/daftar-tenant" }
+        ] },
+        { "label": "Teaching Factory", "href": "/unit/teaching-factory", "submenu": [
+          { "label": "Profil", "href": "/unit/teaching-factory/profil" },
+          { "label": "Produk TeFa", "href": "/unit/teaching-factory/produk" },
+          { "label": "Form Permintaan Produk", "href": "/unit/form-permintaanproduk" }
+        ] }
+      ]
+    },
+    { "label": "Kemahasiswaan", "href": "/kemahasiswaan","submenu": [
+        { "label": "Organisasi Kemahasiswaan", "href": "/kemahasiswaan/organisasi-kemahasiswaan","submenu": [
+            { "label": "BEM", "href": "/kemahasiswaan/organisasi-kemahasiswaan/bem" },
+            { "label": "MPM", "href": "/kemahasiswaan/organisasi-kemahasiswaan/mpm" },
+            { "label": "FLMPI", "href": "/kemahasiswaan/organisasi-kemahasiswaan/flmpi" }
+        ]},
+        { "label": "Statistika Mahasiswa", "href": "/kemahasiswaan/statistika-mahasiswa" }
+      ] 
+    },
+    { "label": "News", "href": "/news","submenu": [
+        { "label": "Berita", "href": "/news/berita" },
+        { "label": "Pengumuman", "href": "/news/pengumuman" }
+      ] 
+    },
+    { "label": "Informasi Publik", "href": "/informasi-publik", "submenu": [
+        { "label": "PPID", "href": "/informasi-publik/ppid" },
+        { "label": "Informasi Publik", "href": "/informasi-publik/info-grafis" },
+        { "label": "Pelayanan Publik", "href": "/informasi-publik/laporan-publik" }
+      ] 
+    },
+    { "label": "Saran dan Pengaduan", "href": "/saran-pengaduan","submenu": [
+        { "label": "Saran Dan Pengaduan Masyarakat", "href": "/saran-pengaduan/saran-dan-pengaduan" },
+        { "label": "SP4N-Lapor", "href": "/saran-pengaduan/sp4n-lapor" }
+      ] 
+    },
+    { "label": "Contact", "href": "/contact" }
+  ]
+}
+
