@@ -10,7 +10,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'new.ak-tekstilsolo.ac.id',
+        hostname: 'adminweb.ak-tekstilsolo.ac.id',
       },
       {
         protocol: 'http',

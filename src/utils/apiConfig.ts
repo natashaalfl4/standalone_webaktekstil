@@ -1,4 +1,4 @@
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://new.ak-tekstilsolo.ac.id';
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://adminweb.ak-tekstilsolo.ac.id';
 
 /**
  * Helper untuk membuat URL API lengkap
