@@ -9,29 +9,23 @@ const normalizeUrl = (url: string): string => {
 
   let normalized = url.trim();
 
-  // Fix malformed protocols (https:/ -> https://)
   normalized = normalized.replace(/^https?:\/(?!\/)/, (match) => match + '/');
 
-  // If already has proper protocol, return as is
   if (normalized.startsWith('http://') || normalized.startsWith('https://')) {
     return normalized;
   }
 
-  // If starts with www., add https://
   if (normalized.startsWith('www.')) {
     return `https://${normalized}`;
   }
 
-  // If it looks like a domain (contains a dot and no slashes at start), add https://
   if (normalized.includes('.') && !normalized.startsWith('/')) {
     return `https://${normalized}`;
   }
 
-  // Otherwise return as is (likely internal path)
   return normalized;
 };
 
-// Helper to check if URL is external
 const isExternalUrl = (url: string): boolean => {
   const normalized = normalizeUrl(url);
   return normalized.startsWith('http://') || normalized.startsWith('https://');
