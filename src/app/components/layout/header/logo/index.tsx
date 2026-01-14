@@ -16,9 +16,9 @@ const Logo: React.FC<LogoProps> = ({ src }) => {
         <Image
           src={getImgPath(imageSrc)}
           alt="AK Tekstil Solo logo"
-          width={130}
-          height={50}
-          className="h-12 w-auto object-contain rounded dark:mix-blend-screen dark:invert"
+          width={250}
+          height={100}
+          className="h-24 w-auto object-contain rounded dark:mix-blend-screen dark:invert"
           quality={100}
         />
       </div>

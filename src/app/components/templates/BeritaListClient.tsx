@@ -11,6 +11,10 @@ interface Berita {
     thumbnail: string;
     url_halaman: string;
     created_at: string;
+    kategori?: {
+        id: number;
+        nama_kategori: string;
+    };
 }
 
 interface BeritaListClientProps {
@@ -126,7 +130,7 @@ export default function BeritaListClient({ beritaData, itemsPerPage = 12 }: Beri
                             {/* Category Badge */}
                             <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 <span className="bg-blue-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg">
-                                    Berita
+                                    {item.kategori?.nama_kategori || 'Berita'}
                                 </span>
                             </div>
 
@@ -199,8 +203,8 @@ export default function BeritaListClient({ beritaData, itemsPerPage = 12 }: Beri
                         onClick={() => handlePageChange(currentPage - 1)}
                         disabled={currentPage === 1}
                         className={`flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-300 ${currentPage === 1
-                                ? "bg-slate-100 dark:bg-slate-800 text-slate-400 cursor-not-allowed"
-                                : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-blue-600 hover:text-white shadow-md hover:shadow-lg"
+                            ? "bg-slate-100 dark:bg-slate-800 text-slate-400 cursor-not-allowed"
+                            : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-blue-600 hover:text-white shadow-md hover:shadow-lg"
                             }`}
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -215,10 +219,10 @@ export default function BeritaListClient({ beritaData, itemsPerPage = 12 }: Beri
                             onClick={() => typeof page === "number" && handlePageChange(page)}
                             disabled={page === "..."}
                             className={`flex items-center justify-center min-w-[40px] h-10 px-3 rounded-xl font-medium transition-all duration-300 ${page === currentPage
-                                    ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30"
-                                    : page === "..."
-                                        ? "bg-transparent text-slate-400 cursor-default"
-                                        : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-blue-100 dark:hover:bg-blue-900/30 shadow-md"
+                                ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30"
+                                : page === "..."
+                                    ? "bg-transparent text-slate-400 cursor-default"
+                                    : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-blue-100 dark:hover:bg-blue-900/30 shadow-md"
                                 }`}
                         >
                             {page}
@@ -230,8 +234,8 @@ export default function BeritaListClient({ beritaData, itemsPerPage = 12 }: Beri
                         onClick={() => handlePageChange(currentPage + 1)}
                         disabled={currentPage === totalPages}
                         className={`flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-300 ${currentPage === totalPages
-                                ? "bg-slate-100 dark:bg-slate-800 text-slate-400 cursor-not-allowed"
-                                : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-blue-600 hover:text-white shadow-md hover:shadow-lg"
+                            ? "bg-slate-100 dark:bg-slate-800 text-slate-400 cursor-not-allowed"
+                            : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-blue-600 hover:text-white shadow-md hover:shadow-lg"
                             }`}
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
