@@ -3,6 +3,40 @@ import Link from "next/link";
 import { getImgPath } from '@/utils/pathUtils';
 import { getFooterData } from "@/lib/getFooterData";
 
+// Helper function to normalize URLs from CMS
+const normalizeUrl = (url: string): string => {
+  if (!url) return '';
+
+  let normalized = url.trim();
+
+  // Fix malformed protocols (https:/ -> https://)
+  normalized = normalized.replace(/^https?:\/(?!\/)/, (match) => match + '/');
+
+  // If already has proper protocol, return as is
+  if (normalized.startsWith('http://') || normalized.startsWith('https://')) {
+    return normalized;
+  }
+
+  // If starts with www., add https://
+  if (normalized.startsWith('www.')) {
+    return `https://${normalized}`;
+  }
+
+  // If it looks like a domain (contains a dot and no slashes at start), add https://
+  if (normalized.includes('.') && !normalized.startsWith('/')) {
+    return `https://${normalized}`;
+  }
+
+  // Otherwise return as is (likely internal path)
+  return normalized;
+};
+
+// Helper to check if URL is external
+const isExternalUrl = (url: string): boolean => {
+  const normalized = normalizeUrl(url);
+  return normalized.startsWith('http://') || normalized.startsWith('https://');
+};
+
 const Footer = async () => {
   const data = await getFooterData();
 
@@ -166,18 +200,14 @@ const Footer = async () => {
             </h4>
             <ul className="space-y-3">
               {data.quick_links.map((link, index) => {
-                // Normalize URL: add https:// if starts with www.
-                let normalizedUrl = link.url;
-                if (link.url.startsWith('www.')) {
-                  normalizedUrl = `https://${link.url}`;
-                }
+                const normalized = normalizeUrl(link.url);
+                const isExternal = isExternalUrl(link.url);
 
-                const isExternal = normalizedUrl.startsWith('http://') || normalizedUrl.startsWith('https://');
                 return (
                   <li key={index}>
                     {isExternal ? (
                       <a
-                        href={normalizedUrl}
+                        href={normalized}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-blue-100 hover:text-white transition-colors flex items-center gap-2 group"
@@ -186,7 +216,7 @@ const Footer = async () => {
                         {link.label}
                       </a>
                     ) : (
-                      <Link href={`/${normalizedUrl}`} className="text-blue-100 hover:text-white transition-colors flex items-center gap-2 group">
+                      <Link href={`/${normalized}`} className="text-blue-100 hover:text-white transition-colors flex items-center gap-2 group">
                         <span className="w-1.5 h-1.5 bg-blue-400 rounded-full group-hover:bg-white transition-colors"></span>
                         {link.label}
                       </Link>
@@ -205,18 +235,12 @@ const Footer = async () => {
             </h4>
             <ul className="space-y-3">
               {data.related_links.map((link, index) => {
-                // Normalize URL: add https:// if starts with www.
-                let normalizedUrl = link.url;
-                if (link.url.startsWith('www.')) {
-                  normalizedUrl = `https://${link.url}`;
-                } else if (!link.url.startsWith('http://') && !link.url.startsWith('https://')) {
-                  normalizedUrl = `https://${link.url}`;
-                }
+                const normalized = normalizeUrl(link.url);
 
                 return (
                   <li key={index}>
                     <a
-                      href={normalizedUrl}
+                      href={normalized}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-100 hover:text-white transition-colors flex items-center gap-2 group"
