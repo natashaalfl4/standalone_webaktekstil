@@ -165,14 +165,35 @@ const Footer = async () => {
               Link Cepat
             </h4>
             <ul className="space-y-3">
-              {data.quick_links.map((link, index) => (
-                <li key={index}>
-                  <Link href={`/${link.url}`} className="text-blue-100 hover:text-white transition-colors flex items-center gap-2 group">
-                    <span className="w-1.5 h-1.5 bg-blue-400 rounded-full group-hover:bg-white transition-colors"></span>
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+              {data.quick_links.map((link, index) => {
+                // Normalize URL: add https:// if starts with www.
+                let normalizedUrl = link.url;
+                if (link.url.startsWith('www.')) {
+                  normalizedUrl = `https://${link.url}`;
+                }
+
+                const isExternal = normalizedUrl.startsWith('http://') || normalizedUrl.startsWith('https://');
+                return (
+                  <li key={index}>
+                    {isExternal ? (
+                      <a
+                        href={normalizedUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-100 hover:text-white transition-colors flex items-center gap-2 group"
+                      >
+                        <span className="w-1.5 h-1.5 bg-blue-400 rounded-full group-hover:bg-white transition-colors"></span>
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link href={`/${normalizedUrl}`} className="text-blue-100 hover:text-white transition-colors flex items-center gap-2 group">
+                        <span className="w-1.5 h-1.5 bg-blue-400 rounded-full group-hover:bg-white transition-colors"></span>
+                        {link.label}
+                      </Link>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
@@ -183,19 +204,29 @@ const Footer = async () => {
               Halaman Terkait
             </h4>
             <ul className="space-y-3">
-              {data.related_links.map((link, index) => (
-                <li key={index}>
-                  <Link
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-100 hover:text-white transition-colors flex items-center gap-2 group"
-                  >
-                    <span className="w-1.5 h-1.5 bg-blue-400 rounded-full group-hover:bg-white transition-colors"></span>
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+              {data.related_links.map((link, index) => {
+                // Normalize URL: add https:// if starts with www.
+                let normalizedUrl = link.url;
+                if (link.url.startsWith('www.')) {
+                  normalizedUrl = `https://${link.url}`;
+                } else if (!link.url.startsWith('http://') && !link.url.startsWith('https://')) {
+                  normalizedUrl = `https://${link.url}`;
+                }
+
+                return (
+                  <li key={index}>
+                    <a
+                      href={normalizedUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-100 hover:text-white transition-colors flex items-center gap-2 group"
+                    >
+                      <span className="w-1.5 h-1.5 bg-blue-400 rounded-full group-hover:bg-white transition-colors"></span>
+                      {link.label}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
