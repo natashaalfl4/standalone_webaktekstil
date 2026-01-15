@@ -323,77 +323,73 @@ html {
     @apply text-sm text-gray dark:text-gray text-center mt-2 italic;
 }
 
-/* Tables - Modern Premium Design */
+/* Tables - Modern Design with Clear Borders */
 /* Works with both <thead>/<tbody> structure AND simple <table><tr> structure */
 .blog-details table {
     @apply mb-8 w-full;
-    border-collapse: separate;
-    border-spacing: 0;
-    border-radius: 1rem;
+    border-collapse: collapse;
+    border-radius: 0.75rem;
     overflow: hidden;
-    box-shadow: 0 4px 20px -5px rgba(59, 130, 246, 0.15), 0 2px 8px -2px rgba(0, 0, 0, 0.1);
-    background: white;
+    box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.1), 0 2px 6px -2px rgba(0, 0, 0, 0.05);
+    border: 2px solid #e2e8f0;
 }
 
 .dark .blog-details table {
-    background: #1e293b;
+    border-color: #334155;
+    box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.3);
 }
 
 /* Header row styling - works with thead OR first tr */
 .blog-details thead,
 .blog-details table>tbody>tr:first-child,
 .blog-details table>tr:first-child {
-    background: linear-gradient(135deg, #1e3a5f 0%, #1a56db 100%) !important;
+    background: #1e40af !important;
 }
 
 .dark .blog-details thead,
 .dark .blog-details table>tbody>tr:first-child,
 .dark .blog-details table>tr:first-child {
-    background: linear-gradient(135deg, #1e293b 0%, #475569 100%) !important;
+    background: #1e293b !important;
 }
 
 /* Header cells - th OR first row td */
 .blog-details th,
 .blog-details table>tbody>tr:first-child td,
 .blog-details table>tr:first-child td {
-    @apply px-6 py-4 text-center font-bold text-white text-sm uppercase tracking-wider;
-    border: none !important;
-    position: relative;
+    @apply px-5 py-4 text-center font-bold text-white text-sm uppercase tracking-wider;
+    border: 1px solid #1e3a8a !important;
     background: transparent !important;
 }
 
-.blog-details th:not(:last-child)::after,
-.blog-details table>tbody>tr:first-child td:not(:last-child)::after,
-.blog-details table>tr:first-child td:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 25%;
-    height: 50%;
-    width: 1px;
-    background: rgba(255, 255, 255, 0.3);
+.dark .blog-details th,
+.dark .blog-details table>tbody>tr:first-child td,
+.dark .blog-details table>tr:first-child td {
+    border-color: #334155 !important;
 }
 
 /* Body styling */
 .blog-details tbody {
-    @apply bg-white dark:bg-slate-800;
+    background: white;
 }
 
+.dark .blog-details tbody {
+    background: #1e293b;
+}
+
+/* Data cells with clear borders */
 .blog-details td {
-    @apply px-6 py-4 text-center text-slate-700 dark:text-slate-300;
-    border: none;
-    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-    transition: all 0.3s ease;
+    @apply px-5 py-4 text-center text-slate-700 dark:text-slate-300;
+    border: 1px solid #e2e8f0;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .dark .blog-details td {
-    border-bottom: 1px solid rgba(51, 65, 85, 0.8);
+    border-color: #334155;
 }
 
-/* Data rows - skip first row if no thead */
+/* Data rows */
 .blog-details tbody tr,
 .blog-details table>tr {
-    @apply transition-all duration-300;
     background: white;
 }
 
@@ -405,66 +401,104 @@ html {
 /* Alternating row colors - skip header row */
 .blog-details tbody tr:nth-child(odd):not(:first-child),
 .blog-details table>tr:nth-child(odd):not(:first-child) {
-    @apply bg-white dark:bg-slate-800;
+    background: #ffffff;
+}
+
+.dark .blog-details tbody tr:nth-child(odd):not(:first-child),
+.dark .blog-details table>tr:nth-child(odd):not(:first-child) {
+    background: #1e293b;
 }
 
 .blog-details tbody tr:nth-child(even):not(:first-child),
 .blog-details table>tr:nth-child(even):not(:first-child) {
-    @apply bg-blue-50/50 dark:bg-slate-700/50;
+    background: #f8fafc;
+}
+
+.dark .blog-details tbody tr:nth-child(even):not(:first-child),
+.dark .blog-details table>tr:nth-child(even):not(:first-child) {
+    background: #0f172a;
 }
 
 /* For tables WITH thead - apply alternating to tbody directly */
 .blog-details thead+tbody tr:nth-child(odd) {
-    @apply bg-white dark:bg-slate-800;
+    background: #ffffff;
+}
+
+.dark .blog-details thead+tbody tr:nth-child(odd) {
+    background: #1e293b;
 }
 
 .blog-details thead+tbody tr:nth-child(even) {
-    @apply bg-blue-50/50 dark:bg-slate-700/50;
+    background: #f8fafc;
+}
+
+.dark .blog-details thead+tbody tr:nth-child(even) {
+    background: #0f172a;
 }
 
 /* Hover effects - skip header */
 .blog-details tbody tr:not(:first-child):hover,
 .blog-details thead+tbody tr:hover,
 .blog-details table>tr:not(:first-child):hover {
-    @apply bg-blue-100/70 dark:bg-blue-900/30;
-    transform: scale(1.005);
-    box-shadow: 0 4px 12px -2px rgba(59, 130, 246, 0.15);
+    background: #dbeafe !important;
+}
+
+.dark .blog-details tbody tr:not(:first-child):hover,
+.dark .blog-details thead+tbody tr:hover,
+.dark .blog-details table>tr:not(:first-child):hover {
+    background: #1e3a5f !important;
 }
 
 .blog-details tbody tr:not(:first-child):hover td,
 .blog-details thead+tbody tr:hover td,
 .blog-details table>tr:not(:first-child):hover td {
-    @apply text-blue-700 dark:text-blue-300;
+    color: #1e40af;
 }
 
-/* Last row no border */
-.blog-details tbody tr:last-child td,
-.blog-details table>tr:last-child td {
-    border-bottom: none;
+.dark .blog-details tbody tr:not(:first-child):hover td,
+.dark .blog-details thead+tbody tr:hover td,
+.dark .blog-details table>tr:not(:first-child):hover td {
+    color: #93c5fd;
 }
 
 /* First column emphasis - data rows only */
 .blog-details tbody tr:not(:first-child) td:first-child,
 .blog-details thead+tbody tr td:first-child,
 .blog-details table>tr:not(:first-child) td:first-child {
-    @apply font-semibold text-slate-700 dark:text-slate-200;
+    @apply font-semibold;
+    color: #1e293b;
+}
+
+.dark .blog-details tbody tr:not(:first-child) td:first-child,
+.dark .blog-details thead+tbody tr td:first-child,
+.dark .blog-details table>tr:not(:first-child) td:first-child {
+    color: #e2e8f0;
 }
 
 /* Links inside tables */
 .blog-details table a {
-    @apply text-blue-600 dark:text-blue-400 font-medium;
+    color: #2563eb;
+    font-weight: 500;
     text-decoration: none;
     transition: all 0.2s ease;
 }
 
+.dark .blog-details table a {
+    color: #60a5fa;
+}
+
 .blog-details table a:hover {
-    @apply text-blue-800 dark:text-blue-300;
+    color: #1d4ed8;
     text-decoration: underline;
+}
+
+.dark .blog-details table a:hover {
+    color: #93c5fd;
 }
 
 /* Responsive table wrapper */
 .blog-details .table-wrapper {
-    @apply overflow-x-auto rounded-xl;
+    @apply overflow-x-auto;
     -webkit-overflow-scrolling: touch;
 }
 
