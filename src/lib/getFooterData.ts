@@ -14,6 +14,8 @@ export interface FooterData {
     id: number;
     logo: string;
     header_logo?: string;
+    website_title?: string;
+    favicon?: string;
     description: string;
     phone: string;
     email: string;
@@ -25,6 +27,7 @@ export interface FooterData {
     quick_links: QuickLink[];
     related_links: RelatedLink[];
     copyright: string;
+    comments_enabled?: boolean;
 }
 
 

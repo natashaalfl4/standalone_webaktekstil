@@ -323,25 +323,104 @@ html {
     @apply text-sm text-gray dark:text-gray text-center mt-2 italic;
 }
 
-/* Tables */
+/* Tables - Modern Premium Design */
 .blog-details table {
-    @apply mb-6 w-full border-collapse;
+    @apply mb-8 w-full border-collapse;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 20px -5px rgba(59, 130, 246, 0.15), 0 2px 8px -2px rgba(0, 0, 0, 0.1);
 }
 
 .blog-details thead {
-    @apply bg-light dark:bg-darklight;
+    background: linear-gradient(135deg, #1e3a5f 0%, #1a56db 100%);
+}
+
+.dark .blog-details thead {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
 }
 
 .blog-details th {
-    @apply border border-lightgray dark:border-dark_border px-4 py-2 text-left font-semibold text-midnight_text dark:text-white;
+    @apply px-6 py-4 text-center font-bold text-white text-sm uppercase tracking-wider;
+    border: none;
+    position: relative;
+}
+
+.blog-details th:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 25%;
+    height: 50%;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.blog-details tbody {
+    @apply bg-white dark:bg-slate-800;
 }
 
 .blog-details td {
-    @apply border border-lightgray dark:border-dark_border px-4 py-2 text-midnight_text dark:text-gray;
+    @apply px-6 py-4 text-center text-midnight_text dark:text-gray;
+    border: none;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    transition: all 0.3s ease;
+}
+
+.dark .blog-details td {
+    border-bottom: 1px solid rgba(51, 65, 85, 0.8);
+}
+
+.blog-details tbody tr {
+    @apply transition-all duration-300;
+}
+
+.blog-details tbody tr:nth-child(odd) {
+    @apply bg-white dark:bg-slate-800;
 }
 
 .blog-details tbody tr:nth-child(even) {
-    @apply bg-section dark:bg-semidark;
+    @apply bg-blue-50/50 dark:bg-slate-700/50;
+}
+
+.blog-details tbody tr:hover {
+    @apply bg-blue-100/70 dark:bg-blue-900/30;
+    transform: scale(1.01);
+    box-shadow: 0 4px 12px -2px rgba(59, 130, 246, 0.15);
+}
+
+.blog-details tbody tr:hover td {
+    @apply text-blue-700 dark:text-blue-300;
+}
+
+.blog-details tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Make first column stand out */
+.blog-details tbody td:first-child {
+    @apply font-semibold text-slate-700 dark:text-slate-200;
+}
+
+/* Links inside tables */
+.blog-details table a {
+    @apply text-blue-600 dark:text-blue-400 font-medium no-underline;
+    transition: all 0.2s ease;
+}
+
+.blog-details table a:hover {
+    @apply text-blue-800 dark:text-blue-300 underline;
+}
+
+/* Responsive table wrapper */
+.blog-details .table-wrapper {
+    @apply overflow-x-auto rounded-xl;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Table caption if any */
+.blog-details caption {
+    @apply py-3 text-sm text-slate-500 dark:text-slate-400 italic;
+    caption-side: bottom;
 }
 
 /* Horizontal Rule */

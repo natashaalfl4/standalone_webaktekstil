@@ -3,7 +3,7 @@ import { getApiUrl } from "@/utils/apiConfig";
 import BeritaListClient from "@/app/components/templates/BeritaListClient";
 
 export const metadata: Metadata = {
-    title: "Semua Berita - Akademi Tekstil Surakarta",
+    title: "Semua Berita",
 };
 
 async function getBerita() {

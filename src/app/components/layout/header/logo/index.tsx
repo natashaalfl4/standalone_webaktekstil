@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { getImgPath } from '@/utils/pathUtils';
+import { API_BASE_URL } from '@/utils/apiConfig';
 
 interface LogoProps {
   src?: string | null;
@@ -8,13 +8,29 @@ interface LogoProps {
 
 const Logo: React.FC<LogoProps> = ({ src }) => {
   const fallback = 'https://ak-tekstilsolo.ac.id/wp-content/uploads/2018/07/cropped-header-1.jpg';
-  const imageSrc = src ?? fallback;
+
+  // Build the final image source
+  let imageSrc = fallback;
+  if (src) {
+    if (src.startsWith('http')) {
+      // Already a full URL
+      imageSrc = src;
+    } else {
+      // Relative path from backend, add API_BASE_URL and /storage/ if needed
+      const cleanPath = src.startsWith('/') ? src : `/${src}`;
+      if (cleanPath.startsWith('/storage/')) {
+        imageSrc = `${API_BASE_URL}${cleanPath}`;
+      } else {
+        imageSrc = `${API_BASE_URL}/storage${cleanPath}`;
+      }
+    }
+  }
 
   return (
     <Link href="/">
       <div className="flex items-center h-full">
         <Image
-          src={getImgPath(imageSrc)}
+          src={imageSrc}
           alt="AK Tekstil Solo logo"
           width={250}
           height={100}

@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
                     : '/images/og-default.jpg';
 
                 return {
-                    title: `${data.judul} - Akademi Tekstil Surakarta`,
+                    title: data.judul,
                     description: data.konten?.replace(/<[^>]*>/g, '').substring(0, 160) || 'Pengumuman dari Akademi Tekstil Surakarta',
                     openGraph: {
                         title: data.judul,
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     }
 
     return {
-        title: "Detail Pengumuman - Akademi Tekstil Surakarta",
+        title: "Detail Pengumuman",
     };
 }
 

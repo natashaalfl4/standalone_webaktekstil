@@ -96,8 +96,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug?: st
     const { slug } = await params;
     const currentPath = slug ? slug.join("/") : "";
 
+    // Untuk homepage, biarkan layout yang menangani default title
     if (!currentPath) {
-        return { title: "Akademi Tekstil Surakarta" };
+        return {};
     }
 
     const menuItems = await getMenu();
@@ -110,8 +111,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug?: st
     });
 
     if (matchedItem) {
+        // Hanya kirim nama menu, suffix akan ditambahkan otomatis dari layout template
         return {
-            title: `${matchedItem.nama_menu} - Akademi Tekstil Surakarta`,
+            title: matchedItem.nama_menu,
         };
     }
 
@@ -119,6 +121,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug?: st
         title: "Halaman Tidak Ditemukan",
     };
 }
+
 
 export default async function DynamicPage({ params }: { params: Promise<{ slug?: string[] }> }) {
     const { slug } = await params;
