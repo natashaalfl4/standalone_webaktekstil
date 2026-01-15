@@ -35,9 +35,6 @@ const Pengumuman = ({ pengumumanData }: PengumumanProps) => {
             <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md relative z-10">
                 {/* Header Section */}
                 <div className="text-center mb-14">
-                    <span className="inline-block px-4 py-2 bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 text-sm font-semibold rounded-full mb-4">
-                        📢 Info Penting
-                    </span>
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-800 dark:text-white mb-4 tracking-tight">
                         Pengumuman
                     </h2>

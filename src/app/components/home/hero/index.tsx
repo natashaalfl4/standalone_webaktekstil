@@ -67,9 +67,6 @@ const Hero = ({ sliderData }: HeroProps) => {
             {/* Text Content */}
             <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 pb-22">
               <div className="text-center max-w-4xl mx-auto">
-                <span className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-blue-200 text-sm font-medium mb-6 border border-white/20">
-                  ✨ Selamat Datang
-                </span>
                 <h1 className="text-white text-center font-extrabold text-3xl md:text-5xl lg:text-6xl tracking-tight drop-shadow-lg mb-4 leading-tight">
                   {item.judul}
                 </h1>
