@@ -84,13 +84,6 @@ export default function BeritaListClient({ beritaData, itemsPerPage = 12 }: Beri
                             {beritaData.length} Berita
                         </span>
                     </div>
-                    {totalPages > 1 && (
-                        <div className="bg-slate-100 dark:bg-slate-800 px-4 py-2 rounded-full">
-                            <span className="text-slate-600 dark:text-slate-300 font-medium text-sm">
-                                Halaman {currentPage} dari {totalPages}
-                            </span>
-                        </div>
-                    )}
                 </div>
             </div>
 

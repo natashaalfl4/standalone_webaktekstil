@@ -206,7 +206,7 @@ export default function PengumumanListClient({ pengumumanData, itemsPerPage = 10
                                     onClick={() => typeof page === 'number' && handlePageChange(page)}
                                     disabled={page === '...'}
                                     className={`min-w-[40px] h-10 rounded-xl font-medium text-sm transition-all duration-300 ${page === currentPage
-                                        ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-lg shadow-blue-500/30'
+                                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30'
                                         : page === '...'
                                             ? 'cursor-default text-slate-400'
                                             : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
@@ -227,10 +227,6 @@ export default function PengumumanListClient({ pengumumanData, itemsPerPage = 10
                         </button>
                     </div>
 
-                    {/* Page Info */}
-                    <p className="text-sm text-slate-500 dark:text-slate-400">
-                        Halaman {currentPage} dari {totalPages}
-                    </p>
                 </div>
             )}
         </>
