@@ -324,43 +324,63 @@ html {
 }
 
 /* Tables - Modern Premium Design */
+/* Works with both <thead>/<tbody> structure AND simple <table><tr> structure */
 .blog-details table {
-    @apply mb-8 w-full border-collapse;
+    @apply mb-8 w-full;
+    border-collapse: separate;
+    border-spacing: 0;
     border-radius: 1rem;
     overflow: hidden;
     box-shadow: 0 4px 20px -5px rgba(59, 130, 246, 0.15), 0 2px 8px -2px rgba(0, 0, 0, 0.1);
+    background: white;
 }
 
-.blog-details thead {
-    background: linear-gradient(135deg, #1e3a5f 0%, #1a56db 100%);
+.dark .blog-details table {
+    background: #1e293b;
 }
 
-.dark .blog-details thead {
-    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+/* Header row styling - works with thead OR first tr */
+.blog-details thead,
+.blog-details table>tbody>tr:first-child,
+.blog-details table>tr:first-child {
+    background: linear-gradient(135deg, #1e3a5f 0%, #1a56db 100%) !important;
 }
 
-.blog-details th {
+.dark .blog-details thead,
+.dark .blog-details table>tbody>tr:first-child,
+.dark .blog-details table>tr:first-child {
+    background: linear-gradient(135deg, #1e293b 0%, #475569 100%) !important;
+}
+
+/* Header cells - th OR first row td */
+.blog-details th,
+.blog-details table>tbody>tr:first-child td,
+.blog-details table>tr:first-child td {
     @apply px-6 py-4 text-center font-bold text-white text-sm uppercase tracking-wider;
-    border: none;
+    border: none !important;
     position: relative;
+    background: transparent !important;
 }
 
-.blog-details th:not(:last-child)::after {
+.blog-details th:not(:last-child)::after,
+.blog-details table>tbody>tr:first-child td:not(:last-child)::after,
+.blog-details table>tr:first-child td:not(:last-child)::after {
     content: '';
     position: absolute;
     right: 0;
     top: 25%;
     height: 50%;
     width: 1px;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.3);
 }
 
+/* Body styling */
 .blog-details tbody {
     @apply bg-white dark:bg-slate-800;
 }
 
 .blog-details td {
-    @apply px-6 py-4 text-center text-midnight_text dark:text-gray;
+    @apply px-6 py-4 text-center text-slate-700 dark:text-slate-300;
     border: none;
     border-bottom: 1px solid rgba(226, 232, 240, 0.8);
     transition: all 0.3s ease;
@@ -370,45 +390,76 @@ html {
     border-bottom: 1px solid rgba(51, 65, 85, 0.8);
 }
 
-.blog-details tbody tr {
+/* Data rows - skip first row if no thead */
+.blog-details tbody tr,
+.blog-details table>tr {
     @apply transition-all duration-300;
+    background: white;
 }
 
-.blog-details tbody tr:nth-child(odd) {
+.dark .blog-details tbody tr,
+.dark .blog-details table>tr {
+    background: #1e293b;
+}
+
+/* Alternating row colors - skip header row */
+.blog-details tbody tr:nth-child(odd):not(:first-child),
+.blog-details table>tr:nth-child(odd):not(:first-child) {
     @apply bg-white dark:bg-slate-800;
 }
 
-.blog-details tbody tr:nth-child(even) {
+.blog-details tbody tr:nth-child(even):not(:first-child),
+.blog-details table>tr:nth-child(even):not(:first-child) {
     @apply bg-blue-50/50 dark:bg-slate-700/50;
 }
 
-.blog-details tbody tr:hover {
+/* For tables WITH thead - apply alternating to tbody directly */
+.blog-details thead+tbody tr:nth-child(odd) {
+    @apply bg-white dark:bg-slate-800;
+}
+
+.blog-details thead+tbody tr:nth-child(even) {
+    @apply bg-blue-50/50 dark:bg-slate-700/50;
+}
+
+/* Hover effects - skip header */
+.blog-details tbody tr:not(:first-child):hover,
+.blog-details thead+tbody tr:hover,
+.blog-details table>tr:not(:first-child):hover {
     @apply bg-blue-100/70 dark:bg-blue-900/30;
-    transform: scale(1.01);
+    transform: scale(1.005);
     box-shadow: 0 4px 12px -2px rgba(59, 130, 246, 0.15);
 }
 
-.blog-details tbody tr:hover td {
+.blog-details tbody tr:not(:first-child):hover td,
+.blog-details thead+tbody tr:hover td,
+.blog-details table>tr:not(:first-child):hover td {
     @apply text-blue-700 dark:text-blue-300;
 }
 
-.blog-details tbody tr:last-child td {
+/* Last row no border */
+.blog-details tbody tr:last-child td,
+.blog-details table>tr:last-child td {
     border-bottom: none;
 }
 
-/* Make first column stand out */
-.blog-details tbody td:first-child {
+/* First column emphasis - data rows only */
+.blog-details tbody tr:not(:first-child) td:first-child,
+.blog-details thead+tbody tr td:first-child,
+.blog-details table>tr:not(:first-child) td:first-child {
     @apply font-semibold text-slate-700 dark:text-slate-200;
 }
 
 /* Links inside tables */
 .blog-details table a {
-    @apply text-blue-600 dark:text-blue-400 font-medium no-underline;
+    @apply text-blue-600 dark:text-blue-400 font-medium;
+    text-decoration: none;
     transition: all 0.2s ease;
 }
 
 .blog-details table a:hover {
-    @apply text-blue-800 dark:text-blue-300 underline;
+    @apply text-blue-800 dark:text-blue-300;
+    text-decoration: underline;
 }
 
 /* Responsive table wrapper */
