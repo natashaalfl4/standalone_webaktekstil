@@ -11,7 +11,7 @@ const HeroSub: FC<HeroSubProps> = ({ title }) => {
 
     return (
         <>
-            <section className="text-center bg-cover pt-28 pb-10 relative bg-gradient-to-b from-white from-10% dark:from-darkmode to-herobg to-90% dark:to-darklight overflow-x-hidden">
+            <section className="text-center bg-cover pt-24 pb-10 relative bg-gradient-to-b from-white from-10% dark:from-darkmode to-herobg to-90% dark:to-darklight overflow-x-hidden">
                 <h2 className="text-midnight_text text-[40px] leading-[1.2] relative font-bold dark:text-white capitalize">{title}</h2>
             </section>
         </>
