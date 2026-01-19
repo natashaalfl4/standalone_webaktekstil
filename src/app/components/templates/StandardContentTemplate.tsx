@@ -359,7 +359,12 @@ export default function StandardContentTemplate({
 
     // Render link groups cards
     const renderLinkGroups = () => {
-        if (!linkGroups || linkGroups.length === 0) return null;
+        console.log('renderLinkGroups called with:', linkGroups);
+        if (!linkGroups || linkGroups.length === 0) {
+            console.log('linkGroups is empty or undefined');
+            return null;
+        }
+        console.log('Rendering', linkGroups.length, 'link groups');
 
         return (
             <div className="mt-12">
