@@ -142,11 +142,28 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug?:
     }
 
     // 2. Find matching menu item with normalized paths
+    // Also check if path with/without 'url/' prefix matches
     const matchedItem = allItems.find((item: any) => {
         const itemUrl = normalizePath(item.url_halaman);
         const pageUrl = item.page ? normalizePath(item.page.url_halaman) : "";
-        return itemUrl === currentPath || pageUrl === currentPath;
+
+        // Direct match
+        if (itemUrl === currentPath || pageUrl === currentPath) return true;
+
+        // Check if currentPath has url/ prefix and match without it
+        const pathWithoutUrl = currentPath.startsWith('url/') ? currentPath.replace('url/', '') : currentPath;
+        if (itemUrl === pathWithoutUrl || pageUrl === pathWithoutUrl) return true;
+
+        // Check if itemUrl/pageUrl has url/ prefix and match without it
+        const itemUrlWithoutPrefix = itemUrl.startsWith('url/') ? itemUrl.replace('url/', '') : itemUrl;
+        const pageUrlWithoutPrefix = pageUrl.startsWith('url/') ? pageUrl.replace('url/', '') : pageUrl;
+        if (itemUrlWithoutPrefix === currentPath || pageUrlWithoutPrefix === currentPath) return true;
+        if (itemUrlWithoutPrefix === pathWithoutUrl || pageUrlWithoutPrefix === pathWithoutUrl) return true;
+
+        return false;
     });
+
+    console.log('matchedItem:', matchedItem?.nama_menu, 'link_type:', matchedItem?.link_type);
 
     if (!matchedItem) {
         // Fallback for hardcoded routes if they are not in the menu yet
