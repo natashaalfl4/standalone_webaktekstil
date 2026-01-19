@@ -16,6 +16,17 @@ interface ButtonItem {
     color?: string;
 }
 
+// Types for link groups (like UNIB Pusat Informasi)
+interface LinkItem {
+    url: string;
+    text: string;
+}
+
+interface LinkGroup {
+    title: string;
+    links: LinkItem[];
+}
+
 interface StandardContentTemplateProps {
     title: string;
     content: string;
@@ -27,6 +38,8 @@ interface StandardContentTemplateProps {
     buttonUrl?: string | ButtonItem[] | string[];
     buttonText?: string;
     buttons?: ButtonItem[]; // New: array of button objects
+    // Link groups (like UNIB Pusat Informasi cards)
+    linkGroups?: LinkGroup[];
     // Parent menu for breadcrumb (e.g., "Unit", "Kemahasiswaan")
     parentMenu?: {
         name: string;
@@ -43,6 +56,7 @@ export default function StandardContentTemplate({
     buttonUrl,
     buttonText,
     buttons,
+    linkGroups,
     parentMenu
 }: StandardContentTemplateProps) {
     // Build breadcrumb dynamically based on parent menu
@@ -321,6 +335,80 @@ export default function StandardContentTemplate({
         return null;
     };
 
+    // Card colors for link groups (like UNIB: dark blue, yellow, light blue)
+    const linkGroupColors = [
+        {
+            header: 'bg-[#1a237e]', // Dark Navy Blue
+            body: 'bg-[#283593]',   // Slightly lighter blue
+            text: 'text-white',
+            link: 'text-white hover:text-blue-200'
+        },
+        {
+            header: 'bg-[#ffd54f]', // Yellow
+            body: 'bg-[#ffecb3]',   // Light yellow
+            text: 'text-slate-800',
+            link: 'text-slate-800 hover:text-slate-600'
+        },
+        {
+            header: 'bg-[#4fc3f7]', // Light Blue
+            body: 'bg-[#b3e5fc]',   // Very light blue
+            text: 'text-slate-800',
+            link: 'text-slate-800 hover:text-slate-600'
+        }
+    ];
+
+    // Render link groups cards
+    const renderLinkGroups = () => {
+        if (!linkGroups || linkGroups.length === 0) return null;
+
+        return (
+            <div className="mt-12">
+                <div className={`grid gap-6 ${linkGroups.length === 1 ? 'grid-cols-1' :
+                    linkGroups.length === 2 ? 'grid-cols-1 md:grid-cols-2' :
+                        'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+                    }`}>
+                    {linkGroups.map((group, index) => {
+                        const colorIndex = index % linkGroupColors.length;
+                        const colors = linkGroupColors[colorIndex];
+
+                        return (
+                            <div
+                                key={index}
+                                className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+                            >
+                                {/* Card Header */}
+                                <div className={`${colors.header} px-6 py-4`}>
+                                    <h3 className={`text-xl font-bold ${colors.text}`}>
+                                        {group.title}
+                                    </h3>
+                                </div>
+
+                                {/* Card Body with Links */}
+                                <div className={`${colors.body} px-6 py-4 min-h-[200px]`}>
+                                    <ul className="space-y-2">
+                                        {group.links && group.links.map((link, linkIndex) => (
+                                            <li key={linkIndex} className="flex items-start gap-2">
+                                                <span className={`${colors.text} mt-1.5`}>•</span>
+                                                <a
+                                                    href={link.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className={`${colors.link} underline hover:no-underline transition-colors text-sm leading-relaxed`}
+                                                >
+                                                    {link.text}
+                                                </a>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        );
+    };
+
     return (
         <main>
             <HeroSub
@@ -339,6 +427,9 @@ export default function StandardContentTemplate({
                         prose-img:rounded-3xl prose-img:shadow-xl"
                         dangerouslySetInnerHTML={{ __html: content || "" }}
                     />
+
+                    {/* Link Groups Cards - like UNIB Pusat Informasi */}
+                    {renderLinkGroups()}
 
                     {/* Embeds - Google Maps, YouTube, Google Drive, etc. */}
                     {renderEmbeds()}

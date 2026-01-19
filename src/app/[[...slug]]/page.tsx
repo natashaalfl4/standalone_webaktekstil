@@ -174,6 +174,7 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug?:
             let formData = null;
             let embedUrl: any = matchedItem.page ? matchedItem.page.embed_url : "";
             let buttons: any[] = [];
+            let linkGroups: any[] = [];
 
             // Fetch full details to get form if available
             const pageSlug = matchedItem.page?.url_halaman || normalizePath(matchedItem.url_halaman);
@@ -203,6 +204,11 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug?:
                             color: "biru"
                         }];
                     }
+
+                    // Handle link groups (like UNIB Pusat Informasi)
+                    if (fullPage.link_groups && Array.isArray(fullPage.link_groups)) {
+                        linkGroups = fullPage.link_groups;
+                    }
                 }
             }
 
@@ -216,6 +222,7 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug?:
                     form={formData}
                     embedUrl={embedUrl}
                     buttons={buttons}
+                    linkGroups={linkGroups}
                     parentMenu={parentMenu || undefined}
                 />
             );
