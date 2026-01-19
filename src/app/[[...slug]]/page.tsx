@@ -177,7 +177,17 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug?:
             let linkGroups: any[] = [];
 
             // Fetch full details to get form if available
-            const pageSlug = matchedItem.page?.url_halaman || normalizePath(matchedItem.url_halaman);
+            let pageSlug = matchedItem.page?.url_halaman || normalizePath(matchedItem.url_halaman);
+
+            // Remove /url/ prefix if present (API expects just 'profil', not '/url/profil')
+            if (pageSlug && pageSlug.startsWith('/url/')) {
+                pageSlug = pageSlug.replace('/url/', '');
+            }
+            if (pageSlug && pageSlug.startsWith('url/')) {
+                pageSlug = pageSlug.replace('url/', '');
+            }
+
+            console.log('pageSlug for API call:', pageSlug);
 
             if (pageSlug) {
                 const fullPage = await getPageDetail(pageSlug);
