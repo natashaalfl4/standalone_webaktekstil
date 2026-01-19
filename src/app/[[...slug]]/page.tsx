@@ -163,8 +163,6 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug?:
         return false;
     });
 
-    console.log('matchedItem:', matchedItem?.nama_menu, 'link_type:', matchedItem?.link_type);
-
     if (!matchedItem) {
         // Fallback for hardcoded routes if they are not in the menu yet
         if (currentPath === 'berita') return <BeritaListTemplate />;
@@ -203,8 +201,6 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug?:
             if (pageSlug && pageSlug.startsWith('url/')) {
                 pageSlug = pageSlug.replace('url/', '');
             }
-
-            console.log('pageSlug for API call:', pageSlug);
 
             if (pageSlug) {
                 const fullPage = await getPageDetail(pageSlug);
