@@ -206,8 +206,10 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug?:
                     }
 
                     // Handle link groups (like UNIB Pusat Informasi)
+                    console.log('fullPage.link_groups:', fullPage.link_groups);
                     if (fullPage.link_groups && Array.isArray(fullPage.link_groups)) {
                         linkGroups = fullPage.link_groups;
+                        console.log('linkGroups assigned:', linkGroups);
                     }
                 }
             }

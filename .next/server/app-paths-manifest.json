@@ -1,4 +1,3 @@
 {
-  "/api/menu/route": "app/api/menu/route.js",
   "/[[...slug]]/page": "app/[[...slug]]/page.js"
 }
