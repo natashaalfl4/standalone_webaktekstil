@@ -390,10 +390,10 @@ export default function StandardContentTemplate({
 
                                 {/* Card Body with Links */}
                                 <div className={`${colors.body} px-6 py-4 min-h-[200px]`}>
-                                    <ul className="space-y-2">
+                                    <ul className="space-y-3">
                                         {group.links && group.links.map((link, linkIndex) => (
-                                            <li key={linkIndex} className="flex items-start gap-2">
-                                                <span className={`${colors.text} mt-1.5`}>•</span>
+                                            <li key={linkIndex} className="flex items-baseline">
+                                                <span className={`${colors.text} mr-2 flex-shrink-0`}>•</span>
                                                 <a
                                                     href={link.url}
                                                     target="_blank"
