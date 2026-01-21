@@ -237,6 +237,36 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug?:
                 }
             }
 
+            // Manual link groups untuk halaman visi-misi jika API tidak ada data
+            if (linkGroups.length === 0 && (pageSlug === 'visi-misi' || matchedItem.nama_menu?.toLowerCase().includes('visi'))) {
+                linkGroups = [
+                    {
+                        title: "Profil Institusi",
+                        links: [
+                            { text: "Sejarah Akademi", url: "/url/sejarah" },
+                            { text: "Struktur Organisasi", url: "/url/struktur-organisasi" },
+                            { text: "Pimpinan", url: "/url/profil-pimpinan" }
+                        ]
+                    },
+                    {
+                        title: "Program Studi",
+                        links: [
+                            { text: "Teknik Pembuatan Benang", url: "/url/teknik-pembuatan-benang" },
+                            { text: "Teknik Pembuatan Kain Tenun", url: "/url/teknik-pembuatan-kain-tenun" },
+                            { text: "Teknik Pembuatan Garmen", url: "/url/teknik-pembuatan-garmen" }
+                        ]
+                    },
+                    {
+                        title: "Informasi Lainnya",
+                        links: [
+                            { text: "Akreditasi", url: "/url/akreditasi" },
+                            { text: "Fasilitas", url: "/url/fasilitas" },
+                            { text: "Kontak", url: "/kontak" }
+                        ]
+                    }
+                ];
+            }
+
             // Find parent menu for breadcrumb
             const parentMenu = findParentMenu(menuItems, matchedItem);
 
