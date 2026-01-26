@@ -63,9 +63,9 @@ const Footer = async () => {
         }} />
       </div>
 
-      <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md pt-24 pb-8 px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md pt-12 pb-6 px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
 
           {/* Logo & Description */}
           <div className="lg:col-span-1">
@@ -80,7 +80,7 @@ const Footer = async () => {
                 />
               </div>
             </Link>
-            <p className="text-blue-100 text-sm leading-relaxed mb-6">
+            <p className="text-blue-100 text-sm leading-relaxed mb-4">
               {data.description}
             </p>
             {/* Social Media */}

@@ -1,18 +1,4 @@
 {
-  "/(site)/berita/[slug]/page": "app/(site)/berita/[slug]/page.js",
-  "/(site)/pengumuman/[slug]/page": "app/(site)/pengumuman/[slug]/page.js",
-  "/api/layanan/route": "app/api/layanan/route.js",
-  "/api/menu/route": "app/api/menu/route.js",
-  "/(site)/search/page": "app/(site)/search/page.js",
   "/[[...slug]]/page": "app/[[...slug]]/page.js",
-  "/api/slider/route": "app/api/slider/route.js",
-  "/(site)/(auth)/signin/page": "app/(site)/(auth)/signin/page.js",
-  "/(site)/(auth)/forgot-password/page": "app/(site)/(auth)/forgot-password/page.js",
-  "/(site)/documentation/page": "app/(site)/documentation/page.js",
-  "/(site)/(auth)/signup/page": "app/(site)/(auth)/signup/page.js",
-  "/(site)/contact/page": "app/(site)/contact/page.js",
-  "/(site)/blogs/page": "app/(site)/blogs/page.js",
-  "/(site)/berita/page": "app/(site)/berita/page.js",
-  "/_not-found/page": "app/_not-found/page.js",
-  "/(site)/blogs/[slug]/page": "app/(site)/blogs/[slug]/page.js"
+  "/api/menu/route": "app/api/menu/route.js"
 }
