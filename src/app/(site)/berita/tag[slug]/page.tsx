@@ -12,11 +12,22 @@ async function getBeritaByTag(tagSlug: string) {
 
         // Filter berita that have the specified tag
         const filtered = (json.data || []).filter((item: any) => {
-            if (!item.tags || !Array.isArray(item.tags)) return false;
-            return item.tags.some((tag: any) =>
-                (typeof tag === 'string' && tag.toLowerCase() === tagSlug.toLowerCase()) ||
-                (typeof tag === 'object' && tag.slug === tagSlug)
-            );
+            if (!item.tags) return false;
+
+            // Convert tags to array format if it's a string
+            let tagsArray: any[] = [];
+            if (Array.isArray(item.tags)) {
+                tagsArray = item.tags;
+            } else if (typeof item.tags === 'string') {
+                // Split string tags like "sma,s1,tekun,cukup,asn"
+                tagsArray = item.tags.split(',').map((t: string) => t.trim()).filter((t: string) => t.length > 0);
+            }
+
+            // Check if any tag matches the slug
+            return tagsArray.some((tag: any) => {
+                const currentTagSlug = typeof tag === 'string' ? tag.toLowerCase().replace(/\s+/g, '-') : tag.slug;
+                return currentTagSlug === tagSlug.toLowerCase();
+            });
         });
 
         return filtered;
@@ -29,12 +40,27 @@ async function getBeritaByTag(tagSlug: string) {
 // Get tag name from tag slug
 function getTagName(beritaList: any[], tagSlug: string): string {
     for (const berita of beritaList) {
-        if (berita.tags && Array.isArray(berita.tags)) {
-            const tag = berita.tags.find((t: any) =>
-                (typeof t === 'object' && t.slug === tagSlug)
-            );
-            if (tag && typeof tag === 'object') {
-                return tag.nama_tag;
+        if (berita.tags) {
+            // Convert tags to array format if it's a string
+            let tagsArray: any[] = [];
+            if (Array.isArray(berita.tags)) {
+                tagsArray = berita.tags;
+            } else if (typeof berita.tags === 'string') {
+                tagsArray = berita.tags.split(',').map((t: string) => t.trim()).filter((t: string) => t.length > 0);
+            }
+
+            // Find matching tag
+            const tag = tagsArray.find((t: any) => {
+                if (typeof t === 'string') {
+                    return t.toLowerCase().replace(/\s+/g, '-') === tagSlug.toLowerCase();
+                } else if (typeof t === 'object') {
+                    return t.slug === tagSlug;
+                }
+                return false;
+            });
+
+            if (tag) {
+                return typeof tag === 'string' ? tag : tag.nama_tag;
             }
         }
     }
