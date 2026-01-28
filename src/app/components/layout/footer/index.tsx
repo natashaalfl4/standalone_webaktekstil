@@ -63,7 +63,7 @@ const Footer = async () => {
         }} />
       </div>
 
-      <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md pt-12 pb-6 px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md pt-20 pb-6 px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 mb-8">
 
