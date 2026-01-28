@@ -12,36 +12,56 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const { slug } = await params;
 
     try {
-        const res = await fetch(getApiUrl("/api/berita"), { cache: "no-store" });
-        if (res.ok) {
-            const json = await res.json();
-            const data = json.data.find((item: any) =>
-                item.url_halaman === slug || item.id.toString() === slug
-            );
+        // Fetch first page
+        const firstRes = await fetch(getApiUrl("/api/berita?page=1"), { cache: "no-store" });
+        if (!firstRes.ok) return { title: "Detail Berita" };
 
-            if (data) {
-                const thumbnailUrl = data.thumbnail
-                    ? (data.thumbnail.startsWith('http') ? data.thumbnail : `${API_BASE_URL}/storage/${data.thumbnail}`)
-                    : '/images/og-default.jpg';
+        const firstJson = await firstRes.json();
+        let allBerita = firstJson.data || [];
+        const lastPage = firstJson.meta?.last_page || 1;
 
-                return {
+        // Fetch remaining pages if there are more
+        if (lastPage > 1) {
+            const pagePromises = [];
+            for (let page = 2; page <= lastPage; page++) {
+                pagePromises.push(
+                    fetch(getApiUrl(`/api/berita?page=${page}`), { cache: "no-store" })
+                        .then(res => res.ok ? res.json() : { data: [] })
+                        .then(json => json.data || [])
+                );
+            }
+            const additionalPages = await Promise.all(pagePromises);
+            additionalPages.forEach(pageData => {
+                allBerita = allBerita.concat(pageData);
+            });
+        }
+
+        const data = allBerita.find((item: any) =>
+            item.url_halaman === slug || item.id.toString() === slug
+        );
+
+        if (data) {
+            const thumbnailUrl = data.thumbnail
+                ? (data.thumbnail.startsWith('http') ? data.thumbnail : `${API_BASE_URL}/storage/${data.thumbnail}`)
+                : '/images/og-default.jpg';
+
+            return {
+                title: data.judul,
+                description: data.konten?.replace(/<[^>]*>/g, '').substring(0, 160) || 'Berita dari Akademi Tekstil Surakarta',
+                openGraph: {
                     title: data.judul,
                     description: data.konten?.replace(/<[^>]*>/g, '').substring(0, 160) || 'Berita dari Akademi Tekstil Surakarta',
-                    openGraph: {
-                        title: data.judul,
-                        description: data.konten?.replace(/<[^>]*>/g, '').substring(0, 160) || 'Berita dari Akademi Tekstil Surakarta',
-                        images: [{ url: thumbnailUrl, width: 1200, height: 630 }],
-                        type: 'article',
-                        siteName: 'Akademi Tekstil Surakarta',
-                    },
-                    twitter: {
-                        card: 'summary_large_image',
-                        title: data.judul,
-                        description: data.konten?.replace(/<[^>]*>/g, '').substring(0, 160) || 'Berita dari Akademi Tekstil Surakarta',
-                        images: [thumbnailUrl],
-                    },
-                };
-            }
+                    images: [{ url: thumbnailUrl, width: 1200, height: 630 }],
+                    type: 'article',
+                    siteName: 'Akademi Tekstil Surakarta',
+                },
+                twitter: {
+                    card: 'summary_large_image',
+                    title: data.judul,
+                    description: data.konten?.replace(/<[^>]*>/g, '').substring(0, 160) || 'Berita dari Akademi Tekstil Surakarta',
+                    images: [thumbnailUrl],
+                },
+            };
         }
     } catch (error) {
         console.error("Failed to generate metadata:", error);
@@ -54,16 +74,50 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 async function getBeritaDetail(slug: string) {
     try {
-        const res = await fetch(getApiUrl("/api/berita"), { cache: "no-store" });
-        if (res.ok) {
-            const json = await res.json();
-            // Try to find by url_halaman first, then by id
-            const found = json.data.find((item: any) =>
-                item.url_halaman === slug || item.id.toString() === slug
-            );
-            return found || null;
+        // Fetch first page to get pagination info
+        const firstRes = await fetch(getApiUrl("/api/berita?page=1"), { cache: "no-store" });
+        if (!firstRes.ok) return null;
+
+        const firstJson = await firstRes.json();
+        let allBerita = firstJson.data || [];
+        const lastPage = firstJson.meta?.last_page || 1;
+
+        console.log(`[DETAIL] Fetching berita detail for slug: ${slug}`);
+        console.log(`[DETAIL] Total pages: ${lastPage}`);
+
+        // Fetch remaining pages if there are more
+        if (lastPage > 1) {
+            const pagePromises = [];
+            for (let page = 2; page <= lastPage; page++) {
+                pagePromises.push(
+                    fetch(getApiUrl(`/api/berita?page=${page}`), { cache: "no-store" })
+                        .then(res => res.ok ? res.json() : { data: [] })
+                        .then(json => json.data || [])
+                );
+            }
+            const additionalPages = await Promise.all(pagePromises);
+            additionalPages.forEach(pageData => {
+                allBerita = allBerita.concat(pageData);
+            });
         }
-        return null;
+
+        console.log(`[DETAIL] Total berita fetched: ${allBerita.length}`);
+
+        // Try to find by url_halaman first, then by id
+        const found = allBerita.find((item: any) => {
+            const match = item.url_halaman === slug || item.id.toString() === slug;
+            if (match) {
+                console.log(`[DETAIL] Found match: ${item.judul} (url_halaman: ${item.url_halaman})`);
+            }
+            return match;
+        });
+
+        if (!found) {
+            console.log(`[DETAIL] No match found for slug: ${slug}`);
+            console.log(`[DETAIL] Available slugs:`, allBerita.map((item: any) => item.url_halaman).slice(0, 5));
+        }
+
+        return found || null;
     } catch (error) {
         console.error("Failed to fetch detail:", error);
         return null;
