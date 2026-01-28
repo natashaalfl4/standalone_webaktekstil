@@ -65,7 +65,7 @@ const Hero = ({ sliderData }: HeroProps) => {
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-cyan-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
 
             {/* Text Content */}
-            <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 pb-12">
+            <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 pb-16">
               <div className="text-center max-w-4xl mx-auto">
                 <h1 className="text-white text-center font-extrabold text-3xl md:text-5xl lg:text-6xl tracking-tight drop-shadow-lg mb-4 leading-tight">
                   {item.judul}

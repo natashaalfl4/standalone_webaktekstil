@@ -178,6 +178,51 @@ export default async function BeritaDetailPage({ params }: { params: Promise<{ s
                         <div dangerouslySetInnerHTML={{ __html: data.konten || "<p>Tidak ada konten detail.</p>" }} />
                     </div>
 
+                    {/* Tags Section */}
+                    {(() => {
+                        // Convert tags to array format if needed
+                        let tagsArray: any[] = [];
+
+                        if (data.tags) {
+                            if (Array.isArray(data.tags)) {
+                                tagsArray = data.tags;
+                            } else if (typeof data.tags === 'string') {
+                                // If tags is a string like "teknologi,industri", split it
+                                tagsArray = data.tags.split(',').map((t: string) => t.trim()).filter((t: string) => t.length > 0);
+                            }
+                        }
+
+                        return tagsArray.length > 0 ? (
+                            <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-700">
+                                <div className="flex items-start gap-3">
+                                    <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500 text-sm font-medium min-w-fit">
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                                        </svg>
+                                        <span>Tags:</span>
+                                    </div>
+                                    <div className="flex flex-wrap gap-2">
+                                        {tagsArray.map((tag: any, index: number) => {
+                                            const tagSlug = typeof tag === 'string' ? tag.toLowerCase().replace(/\s+/g, '-') : tag.slug;
+                                            const tagName = typeof tag === 'string' ? tag : tag.nama_tag;
+
+                                            return (
+                                                <Link
+                                                    key={tag.id || index}
+                                                    href={`/berita/tag/${tagSlug}`}
+                                                    className="inline-flex items-center gap-1 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 px-3 py-1.5 rounded-full text-sm font-medium border border-blue-200 dark:border-blue-800 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white hover:border-blue-600 transition-all duration-200 hover:scale-105 cursor-pointer"
+                                                >
+                                                    <span className="text-blue-500 dark:text-blue-500 group-hover:text-white">#</span>
+                                                    {tagName}
+                                                </Link>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            </div>
+                        ) : null;
+                    })()}
+
                     {/* Back Link */}
                     <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-700">
                         <Link

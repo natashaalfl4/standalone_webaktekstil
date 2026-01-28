@@ -15,6 +15,7 @@ interface Berita {
         id: number;
         nama_kategori: string;
     };
+    tags?: Array<{ id: number; nama_tag: string; slug: string } | string>;
 }
 
 interface BeritaListClientProps {
@@ -90,88 +91,80 @@ export default function BeritaListClient({ beritaData, itemsPerPage = 12 }: Beri
             {/* News Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {currentBerita.map((item: Berita, index: number) => (
-                    <article
+                    <Link
                         key={item.id}
-                        className="group relative bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-500 hover:-translate-y-2 flex flex-col"
-                        style={{ animationDelay: `${index * 100}ms` }}
+                        href={`/berita/${item.url_halaman}`}
+                        className="block"
                     >
-                        {/* Image Container */}
-                        <div className="relative h-56 overflow-hidden">
-                            <Image
-                                src={item.thumbnail ?
-                                    (item.thumbnail.startsWith('http') ? item.thumbnail : `${API_BASE_URL}/storage/${item.thumbnail}`)
-                                    : '/images/placeholder.jpg'}
-                                alt={item.judul}
-                                fill
-                                className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
-                            />
-                            {/* Gradient Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <article
+                            className="group relative bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-500 hover:-translate-y-2 flex flex-col h-full cursor-pointer"
+                            style={{ animationDelay: `${index * 100}ms` }}
+                        >
+                            {/* Image Container */}
+                            <div className="relative h-56 overflow-hidden">
+                                <Image
+                                    src={item.thumbnail ?
+                                        (item.thumbnail.startsWith('http') ? item.thumbnail : `${API_BASE_URL}/storage/${item.thumbnail}`)
+                                        : '/images/placeholder.jpg'}
+                                    alt={item.judul}
+                                    fill
+                                    className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
+                                />
+                                {/* Gradient Overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                            {/* Date Badge */}
-                            <div className="absolute top-4 left-4">
-                                <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm px-4 py-2 rounded-xl shadow-lg">
-                                    <span className="text-xs font-bold text-blue-600 dark:text-blue-400 block text-center">
-                                        {new Date(item.created_at).toLocaleDateString('id-ID', { day: 'numeric' })}
+                                {/* Date Badge */}
+                                <div className="absolute top-4 left-4">
+                                    <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm px-4 py-2 rounded-xl shadow-lg">
+                                        <span className="text-xs font-bold text-blue-600 dark:text-blue-400 block text-center">
+                                            {new Date(item.created_at).toLocaleDateString('id-ID', { day: 'numeric' })}
+                                        </span>
+                                        <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400 uppercase block text-center">
+                                            {new Date(item.created_at).toLocaleDateString('id-ID', { month: 'short' })}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                {/* Category Badge */}
+                                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <span className="bg-blue-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg">
+                                        {item.kategori?.nama_kategori || 'Berita'}
                                     </span>
-                                    <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400 uppercase block text-center">
-                                        {new Date(item.created_at).toLocaleDateString('id-ID', { month: 'short' })}
-                                    </span>
+                                </div>
+
+                                {/* Read More Icon */}
+                                <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-xl">
+                                        <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
 
-                            {/* Category Badge */}
-                            <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <span className="bg-blue-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg">
-                                    {item.kategori?.nama_kategori || 'Berita'}
-                                </span>
-                            </div>
+                            {/* Content */}
+                            <div className="p-6 flex flex-col flex-grow">
+                                <h3 className="text-slate-800 dark:text-white font-bold text-lg leading-snug line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 mb-3">
+                                    {item.judul}
+                                </h3>
 
-                            {/* Read More Icon */}
-                            <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-xl">
-                                    <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                    </svg>
+                                {/* Decorative line */}
+                                <div className="w-12 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full mb-4 group-hover:w-20 transition-all duration-500" />
+
+                                {/* Footer */}
+                                <div className="mt-auto pt-4 flex justify-between items-center">
+                                    <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500 text-sm">
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                        </svg>
+                                        <span>
+                                            {new Date(item.created_at).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        {/* Content */}
-                        <div className="p-6 flex flex-col flex-grow">
-                            <h3 className="text-slate-800 dark:text-white font-bold text-lg leading-snug line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 mb-3">
-                                {item.judul}
-                            </h3>
-
-                            {/* Decorative line */}
-                            <div className="w-12 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full mb-4 group-hover:w-20 transition-all duration-500" />
-
-                            {/* Footer */}
-                            <div className="mt-auto pt-4 flex justify-between items-center">
-                                <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500 text-sm">
-                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
-                                    <span>
-                                        {new Date(item.created_at).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}
-                                    </span>
-                                </div>
-                            </div>
-
-                            <Link
-                                href={`/berita/${item.url_halaman}`}
-                                className="mt-4 inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-semibold text-sm group/link"
-                            >
-                                <span className="relative">
-                                    Baca Selengkapnya
-                                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 group-hover/link:w-full transition-all duration-300" />
-                                </span>
-                                <svg className="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                </svg>
-                            </Link>
-                        </div>
-                    </article>
+                        </article>
+                    </Link>
                 ))}
             </div>
 
