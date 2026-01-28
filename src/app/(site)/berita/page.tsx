@@ -71,9 +71,6 @@ export default async function BeritaPage() {
                 {/* Content */}
                 <div className="relative z-10 h-full flex flex-col items-center justify-center px-4">
                     <div className="text-center">
-                        <span className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-blue-200 text-sm font-medium mb-4 border border-white/20">
-                            📰 Informasi Terkini
-                        </span>
                         <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-4 tracking-tight">
                             Berita & Kegiatan
                         </h1>

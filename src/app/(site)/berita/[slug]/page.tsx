@@ -297,9 +297,6 @@ export default async function BeritaDetailPage({ params }: { params: Promise<{ s
                 {/* Related Section */}
                 <div className="mt-16">
                     <div className="text-center mb-8">
-                        <span className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-blue-200 text-sm font-medium mb-4 border border-white/20">
-                            📰 Baca Juga
-                        </span>
                         <h3 className="text-white text-2xl md:text-3xl font-bold tracking-tight">
                             Berita Lainnya
                         </h3>
